@@ -7,8 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  
+  <nav>
+    <%= link_to('Admin', admin_home_path) %>
+  </nav>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>
