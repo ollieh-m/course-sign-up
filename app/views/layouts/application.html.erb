@@ -10,7 +10,23 @@
   
   <nav>
     <%= link_to('Admin', admin_home_path) %>
+    <% if current_admin %>
+      <%= link_to('Sign out', admin_session_path, method: :delete) %>
+      <%= link_to('Create admin', new_admin_path) %>
+    <% end %>
   </nav>
+  
+  <% unless flash[:errors].nil? %>
+    <ul><% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+    <% end %></ul>
+  <% end %>
+  
+  <% unless flash[:notices].nil? %>
+    <ul><% flash[:notices].each do |notice| %>
+      <li><%= notice %></li>
+    <% end %></ul>
+  <% end %>
 
   <%= yield %>
 

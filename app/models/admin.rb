@@ -6,10 +6,15 @@ class Admin < ActiveRecord::Base
   include ErrorsHandler
   include BCrypt
   
-  def save_if_valid(admin_params)
+  def validate_then_save(admin_params)
     if validated(admin_params)
       set_password_hash(admin_params[:password]).save
     end
+  end
+  
+  def authenticate(submitted_password)
+    my_password = BCrypt::Password.new(self.password_hash)
+    my_password == submitted_password
   end
   
   private
