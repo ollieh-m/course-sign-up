@@ -3,11 +3,8 @@ require 'bcrypt'
 class Admin < ActiveRecord::Base
     
   include AdminValidations
+  include ErrorsHandler
   include BCrypt
-  
-  def errors
-    @errors ||= []
-  end
   
   def save_if_valid(admin_params)
     if validated(admin_params)
