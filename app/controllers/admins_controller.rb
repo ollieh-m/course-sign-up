@@ -7,13 +7,13 @@ class AdminsController < ApplicationController
   
   def create
     admin = Admin.new(email: admin_params[:email])
-    admin.save_if_valid(admin_params)
-    # if admin.save_if_valid(admin_params)
-    #   #create session for the admin
-    #   #redirect to the admin home page
-    # else
-    #   #display flash using errors
-    # end
+    if admin.save_if_valid(admin_params)
+      sign_in(admin)
+      redirect_to admin_home_path
+    else
+      flash[:errors] = admin.errors
+      redirect_to new_admin_path
+    end
   end
   
   private

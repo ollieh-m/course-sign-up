@@ -12,8 +12,6 @@ class Admin < ActiveRecord::Base
   def save_if_valid(admin_params)
     if validated(admin_params)
       set_password_hash(admin_params[:password]).save
-    else
-      false
     end
   end
   

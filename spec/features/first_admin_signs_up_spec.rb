@@ -7,7 +7,7 @@ feature 'First admin signs up using ENV credentials' do
     allow(ENV).to receive(:[]).with("ADMIN_EMAIL").and_return("testemail")
     visit root_path
     click_on('Admin')
-    fill_in('Email', with: 'testemail')
+    fill_in('Email', with: 'test@email.com')
     fill_in('Password', with: 'testpassword')
     fill_in('Password confirmation', with: 'testpassword')
     click_on('Create admin')
