@@ -4,7 +4,7 @@ describe Admin do
 
   let(:admin){ described_class.new }
 
-  context '#save_if_valid' do
+  context '#validate_then_save' do
     it 'returns false if the email is not a valid email' do
       result = admin.validate_then_save(email: 'test@email', password: 'password', password_confirmation: 'password')
       expect(result).to be_falsey
