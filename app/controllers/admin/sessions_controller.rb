@@ -12,7 +12,7 @@ class Admin::SessionsController < ApplicationController
   
   def create
     admin = Admin.find_by(email: session_params[:email])
-    if admin.authenticate(session_params[:password])
+    if admin && admin.authenticate(session_params[:password])
       sign_in(admin)
       redirect_to admin_home_path
     else

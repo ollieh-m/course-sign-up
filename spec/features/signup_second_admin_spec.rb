@@ -22,9 +22,6 @@ feature 'Admin signs up a second admin' do
     visit root_path
     click_on('Admin')
     create_admin(email: 'test@email.com', password: 'testpassword', password_confirmation: 'testpassword')
-    click_on('Create admin')
-    create_admin(email: 'test2@email.com', password: 'test2password', password_confirmation: 'test2password')
-    expect(page).to have_content('test2@email.com admin account created')
     click_on('Sign out')
     visit new_admin_path
     expect(current_path).to eq new_admin_session_path
