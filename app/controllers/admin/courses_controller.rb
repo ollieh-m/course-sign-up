@@ -1,7 +1,6 @@
 class Admin::CoursesController < ApplicationController
 
   include AdminAuthentication
-  
   before_filter :check_admin_is_signed_in
 
   def index
@@ -10,9 +9,12 @@ class Admin::CoursesController < ApplicationController
   
   def create
     course = Course.new(course_params)
-    if course.save
-      redirect_to admin_courses_path
+    if course.validate_then_save(course_params)
+      flash[:notices] = ["#{course.name} successfully posted"]
+    else
+      flash[:errors] = course.custom_errors
     end
+    redirect_to admin_courses_path
   end
 
   private

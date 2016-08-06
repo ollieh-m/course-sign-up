@@ -5,7 +5,7 @@ module ErrorsHandler
     @valid_status = false
   end
   
-  def errors
+  def custom_errors
     @errors ||= []
   end
   

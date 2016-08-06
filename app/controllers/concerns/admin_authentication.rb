@@ -19,6 +19,7 @@ module AdminAuthentication
   
   def sign_in(admin)
     session[:admin_id] = admin.id
+    redirect_to admin_home_path
   end
   
   def invalid_first_admin(admin_params)

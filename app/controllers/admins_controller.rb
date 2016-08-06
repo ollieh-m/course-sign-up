@@ -12,11 +12,10 @@ class AdminsController < ApplicationController
     
     admin = Admin.new(email: admin_params[:email])
     if admin.validate_then_save(admin_params)
-      sign_in(admin)
       flash[:notices] = ["#{admin.email} admin account created"]
-      redirect_to admin_home_path
+      sign_in(admin)
     else
-      flash[:errors] = admin.errors
+      flash[:errors] = admin.custom_errors
       redirect_to new_admin_path
     end
   end

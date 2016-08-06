@@ -17,4 +17,12 @@ module Features
     end
   end
   
+  def create_course(name:,description:,start_date:,end_date:)
+    fill_in('Course name', with: name)
+    fill_in('Course description', with: description)
+    fill_in('Course start date', with: start_date)
+    fill_in('Course end date', with: end_date)
+    click_on('Post new course')
+  end
+  
 end
