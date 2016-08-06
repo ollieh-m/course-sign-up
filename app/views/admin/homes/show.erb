@@ -1,1 +1,7 @@
 ADMIN HOMEPAGE - <%= current_admin.email %>
+
+<div class='admin-menu'>
+  <%= link_to('Sign out', admin_session_path, method: :delete) %>
+  <%= link_to('Create admin', new_admin_path) %>
+  <%= link_to('Courses', admin_courses_path) %>
+</div>

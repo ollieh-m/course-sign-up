@@ -1,0 +1,11 @@
+<%= form_for @new_course, url: admin_courses_path do |f| %>
+  <%= f.label(:name, 'Course name') %>
+  <%= f.text_field :name %>
+  <%= f.label(:description, 'Course description') %>
+  <%= f.text_field :description %>
+  <%= f.label(:start, 'Course start date') %>
+  <%= f.date_field :start %>
+  <%= f.label(:end, 'Course end date') %>
+  <%= f.date_field :end %>
+  <%= f.submit 'Post new course' %>
+<% end %>

@@ -10,10 +10,7 @@
   
   <nav>
     <%= link_to('Admin', admin_home_path) %>
-    <% if current_admin %>
-      <%= link_to('Sign out', admin_session_path, method: :delete) %>
-      <%= link_to('Create admin', new_admin_path) %>
-    <% end %>
+    <%= link_to('Courses', courses_path) %>
   </nav>
   
   <% unless flash[:errors].nil? %>

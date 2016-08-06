@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   namespace :admin do
     resource :home, only: :show
     resource :session, only: [:destroy, :new, :create]
+    resources :courses, only: [:index, :create]
   end
   
   resources :admins, only: [:new, :create]
+  resources :courses, only: [:index]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
