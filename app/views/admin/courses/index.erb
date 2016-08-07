@@ -1,3 +1,9 @@
+<% unless @courses.empty? %>
+  <% @courses.each do |course| %>
+    <%= link_to course.name, admin_course_path(course) %>
+  <% end %>
+<% end %>
+
 <%= form_for @new_course, url: admin_courses_path do |f| %>
   <%= f.label(:name, 'Course name') %>
   <%= f.text_field :name %>

@@ -1,0 +1,5 @@
+<div class='unconfirmed-attendees'>
+  <ul><%= @course.unconfirmed_attendees.each do |attendee| %>
+    <li><%= attendee.email %></li>
+  <% end %></ul>
+</div>

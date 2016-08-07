@@ -5,6 +5,11 @@ class Admin::CoursesController < ApplicationController
 
   def index
     @new_course = Course.new
+    @courses = Course.all
+  end
+  
+  def show
+    @course = Course.find(params[:id])
   end
   
   def create

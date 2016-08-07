@@ -6,15 +6,11 @@ class RsvpsController < ApplicationController
   end
   
   def create
-    attendee = Attendee.new(attendee_params)
-    course = Course.find(params[:course_id])
-    attendee.rsvps.build(course: course, status: 'Unconfirmed')
-    attendee.save
-    p Rsvp.all
-    p attendee.rsvps
-    p course.rsvps
-    p attendee.courses
-    p course.attendees
+    rsvp = Rsvp.build_with(attendee_params,params[:course_id])
+    if rsvp.save
+      p SecureRandom.urlsafe_base64
+      redirect_to courses_path
+    end
   end
   
   private
