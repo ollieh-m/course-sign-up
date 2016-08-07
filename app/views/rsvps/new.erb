@@ -1,0 +1,7 @@
+<%= form_for @attendee, url: course_rsvps_path(@course) do |f| %>
+  <%= f.label(:email) %>
+  <%= f.email_field(:email) %>
+  <%= f.label(:date_of_birth) %>
+  <%= f.date_field(:date_of_birth) %>
+  <%= f.submit('Sign up') %>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160806093302) do
+ActiveRecord::Schema.define(version: 20160807124808) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20160806093302) do
   end
 
   add_index "admins", ["email"], name: "index_admins_on_email"
+
+  create_table "attendees", force: :cascade do |t|
+    t.string   "email"
+    t.date     "date_of_birth"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "attendees", ["email", "date_of_birth"], name: "index_attendees_on_email_and_date_of_birth"
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"
@@ -34,5 +43,17 @@ ActiveRecord::Schema.define(version: 20160806093302) do
   add_index "courses", ["end"], name: "index_courses_on_end"
   add_index "courses", ["name"], name: "index_courses_on_name"
   add_index "courses", ["start"], name: "index_courses_on_start"
+
+  create_table "rsvps", force: :cascade do |t|
+    t.integer  "attendee_id"
+    t.integer  "course_id"
+    t.string   "status"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "rsvps", ["attendee_id"], name: "index_rsvps_on_attendee_id"
+  add_index "rsvps", ["course_id"], name: "index_rsvps_on_course_id"
+  add_index "rsvps", ["status"], name: "index_rsvps_on_status"
 
 end

@@ -12,8 +12,10 @@ Rails.application.routes.draw do
   end
   
   resources :admins, only: [:new, :create]
-  resources :courses, only: [:index]
-
+  resources :courses, only: [:index] do
+    resources :rsvps, only: [:new, :create]
+  end
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

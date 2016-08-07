@@ -1,6 +1,4 @@
 <% @courses.each do |course| %>
   <%= course.name %>
-  <%= course.description %>
-  <%= course.start %>
-  <%= course.end %>
+  <%= link_to('RSVP', new_course_rsvp_path(course)) %>
 <% end %>
