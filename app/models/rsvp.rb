@@ -1,5 +1,8 @@
 class Rsvp < ActiveRecord::Base
   
+  include ErrorsHandler
+  include RsvpValidations
+  
   validates :attendee, uniqueness: {scope: :course}
   
   belongs_to :attendee
@@ -9,6 +12,10 @@ class Rsvp < ActiveRecord::Base
     attendee = Attendee.new(attendee_params)
     course = Course.find(course_id)
     attendee.rsvps.build(course: course, status: 'unconfirmed')
+  end
+  
+  def validate_then_save
+    save if validated
   end
   
 end

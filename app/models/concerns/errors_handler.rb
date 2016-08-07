@@ -1,12 +1,12 @@
 module ErrorsHandler
   
   def add_error(message)
-    @errors.nil? ? @errors = [message] : @errors << message
+    @custom_errors.nil? ? @custom_errors = [message] : @custom_errors << message
     @valid_status = false
   end
   
   def custom_errors
-    @errors ||= []
+    @custom_errors ||= []
   end
   
   def valid_status

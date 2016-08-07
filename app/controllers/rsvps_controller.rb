@@ -7,8 +7,14 @@ class RsvpsController < ApplicationController
   
   def create
     rsvp = Rsvp.build_with(attendee_params,params[:course_id])
-    if rsvp.save
-      p SecureRandom.urlsafe_base64
+    if rsvp.validate_then_save
+      # rsvp.send_confirmation_token
+      # rsvp_token = SecureRandom.urlsafe_base64
+      #save digest of token in rsvp record
+      #email link containing rsvp token and rsvp id to attendee's email address
+      redirect_to courses_path
+    else
+      flash[:errors] = rsvp.custom_errors
       redirect_to courses_path
     end
   end

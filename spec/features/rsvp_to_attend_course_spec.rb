@@ -32,7 +32,16 @@ feature 'Someone rsvps with their email address to attend a course' do
   end
   
   scenario 'unsuccessfully, without giving an email address' do
-    
+    within(:css, 'nav') do
+      click_on('Courses')
+    end
+    click_on('RSVP')
+    fill_in('Email', with: '')
+    fill_in('Date of birth', with: '1986-05-26')
+    click_on('Sign up')
+    expect(page).to have_content("Email can't be blank")
+    expect(Attendee.all.count).to eq 0
+    expect(Rsvp.all.count).to eq 0
   end
   
   scenario 'unsuccessfully, without giving a DOB' do
