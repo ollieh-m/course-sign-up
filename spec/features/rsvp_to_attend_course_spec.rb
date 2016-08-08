@@ -3,6 +3,8 @@ require 'rails_helper'
 feature 'Someone rsvps with their email address to attend a course' do
 
   before do
+    allow(ENV).to receive(:[])
+    allow(RestClient).to receive(:post)
     allow(ENV).to receive(:[]).with("ADMIN_PASSWORD").and_return("testpassword")
     allow(ENV).to receive(:[]).with("ADMIN_EMAIL").and_return("test@email.com")
     allow(DateTime).to receive(:now).and_return(DateTime.new(2001,2,13))

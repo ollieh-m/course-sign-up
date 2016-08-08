@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :rsvps, only: [:new, :create]
   end
   
+  get 'rsvp_confirmation/:id/:token' => 'rsvp_confirmations#create', as: :rsvp_confirmation
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

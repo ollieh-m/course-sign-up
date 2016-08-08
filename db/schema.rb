@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160807124808) do
+ActiveRecord::Schema.define(version: 20160808150832) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email"
@@ -48,8 +48,9 @@ ActiveRecord::Schema.define(version: 20160807124808) do
     t.integer  "attendee_id"
     t.integer  "course_id"
     t.string   "status"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "confirmation_token_hash"
   end
 
   add_index "rsvps", ["attendee_id"], name: "index_rsvps_on_attendee_id"

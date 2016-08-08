@@ -1,5 +1,7 @@
 class RsvpsController < ApplicationController
   
+  include UrlsForEmails
+  
   def new
     @course = Course.find(params[:course_id])
     @attendee = Attendee.new
@@ -8,10 +10,8 @@ class RsvpsController < ApplicationController
   def create
     rsvp = Rsvp.build_with(attendee_params,params[:course_id])
     if rsvp.save
-      # rsvp.send_confirmation_token
-      # rsvp_token = SecureRandom.urlsafe_base64
-      #save digest of token in rsvp record
-      #email link containing rsvp token and rsvp id to attendee's email address
+      token = TokenGenerator.new(rsvp).call(:confirmation)
+      Mailer.new.send_confirmation_token(to: rsvp.attendee, link: link(type: 'rsvp_confirmation', object: rsvp, token: token))
       redirect_to courses_path
     else
       flash[:errors] = rsvp.errors.full_messages
