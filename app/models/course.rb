@@ -3,6 +3,11 @@ class Course < ActiveRecord::Base
   include CourseValidations
   include ErrorsHandler
   
+  validates :name, presence: true
+  validates :start, presence: true
+  validates :end, presence: true
+  validate { validate_dates_order }
+  
   has_many :rsvps
   has_many :attendees, through: :rsvps
   
@@ -10,10 +15,6 @@ class Course < ActiveRecord::Base
     rsvps.where(status: 'unconfirmed').map do |rsvp|
       rsvp.attendee
     end
-  end
-    
-  def validate_then_save(course_params)
-    save if validated(course_params)
   end
   
 end

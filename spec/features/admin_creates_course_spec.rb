@@ -36,7 +36,7 @@ feature 'Admin creates a course' do
       click_on('Courses')
     end
     create_course(name:'',description:'testdescription',start_date:'2001-02-14',end_date:'2001-02-15')
-    expect(page).to have_content('Course cannot be posted without a name')
+    expect(page).to have_content("Name can't be blank")
     expect(Course.all.count).to eq 0
   end
   
@@ -48,7 +48,7 @@ feature 'Admin creates a course' do
       click_on('Courses')
     end
     create_course(name:'testname',description:'testdescription',start_date:'',end_date:'2001-02-15')
-    expect(page).to have_content('Course needs a start date')
+    expect(page).to have_content("Start can't be blank")
     expect(Course.all.count).to eq 0
   end
   
@@ -60,7 +60,7 @@ feature 'Admin creates a course' do
       click_on('Courses')
     end
     create_course(name:'testname',description:'testdescription',start_date:'2001-02-14',end_date:'')
-    expect(page).to have_content('Course needs an end date')
+    expect(page).to have_content("End can't be blank")
     expect(Course.all.count).to eq 0
   end
   

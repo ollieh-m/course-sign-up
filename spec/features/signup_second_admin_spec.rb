@@ -27,4 +27,34 @@ feature 'Admin signs up a second admin' do
     expect(current_path).to eq new_admin_session_path
   end
   
+  scenario 'unsuccessfully, with invalid email' do
+    visit root_path
+    click_on('Admin')
+    create_admin(email: 'test@email.com', password: 'testpassword', password_confirmation: 'testpassword')
+    click_on('Create admin')
+    create_admin(email: 'test2@email', password: 'test2password', password_confirmation: 'test2password')
+    expect(page).to have_content('You must enter a valid email')
+    expect(Admin.all.count).to eq 1
+  end
+  
+  scenario 'unsuccessfully, with password confirmation not matching' do
+    visit root_path
+    click_on('Admin')
+    create_admin(email: 'test@email.com', password: 'testpassword', password_confirmation: 'testpassword')
+    click_on('Create admin')
+    create_admin(email: 'test2@email.com', password: 'test2password', password_confirmation: 'test3password')
+    expect(page).to have_content("Password confirmation doesn't match")
+    expect(Admin.all.count).to eq 1
+  end
+  
+  scenario 'unsuccessfully, with no password' do
+    visit root_path
+    click_on('Admin')
+    create_admin(email: 'test@email.com', password: 'testpassword', password_confirmation: 'testpassword')
+    click_on('Create admin')
+    create_admin(email: 'test2@email.com', password: '', password_confirmation: '')
+    expect(page).to have_content("Password can't be blank")
+    expect(Admin.all.count).to eq 1
+  end
+  
 end

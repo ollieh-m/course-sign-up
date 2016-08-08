@@ -14,10 +14,10 @@ class Admin::CoursesController < ApplicationController
   
   def create
     course = Course.new(course_params)
-    if course.validate_then_save(course_params)
+    if course.save
       flash[:notices] = ["#{course.name} successfully posted"]
     else
-      flash[:errors] = course.custom_errors
+      flash[:errors] = course.errors.full_messages
     end
     redirect_to admin_courses_path
   end
