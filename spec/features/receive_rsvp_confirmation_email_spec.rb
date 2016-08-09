@@ -1,6 +1,7 @@
 feature 'Someone rsvps to attend a course and receives an email with a confirmation token' do
 
   before do
+    allow(RestClient).to receive(:post)
     allow(ENV).to receive(:[]).with("ADMIN_PASSWORD").and_return("testpassword")
     allow(ENV).to receive(:[]).with("ADMIN_EMAIL").and_return("test@email.com")
     allow(ENV).to receive(:[]).with("MAILER_API").and_return("dummyapi")
@@ -18,7 +19,6 @@ feature 'Someone rsvps to attend a course and receives an email with a confirmat
   end
   
   scenario 'successfully' do
-    allow(RestClient).to receive(:post)
     within(:css, 'nav') do
       click_on('Courses')
     end
