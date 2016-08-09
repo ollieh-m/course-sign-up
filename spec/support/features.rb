@@ -25,4 +25,10 @@ module Features
     click_on('Post new course')
   end
   
+  def course_sign_up(email:,date_of_birth:)
+    fill_in('Email', with: email)
+    fill_in('Date of birth', with: date_of_birth)
+    click_on('Sign up')
+  end
+  
 end

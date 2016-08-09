@@ -18,18 +18,17 @@ feature 'Someone rsvps to attend a course and receives an email with a confirmat
   end
   
   scenario 'successfully' do
-    expect(RestClient).to receive(:post).with("https://api:dummyapi@api.mailgun.net/v3/dummydomain/messages",
-                                              {:from=>"Course admin <mailgun@dummydomain>",
-                                              :to=>"attendee@email.com",
-                                              :subject => "Confirm your place on the course",
-                                              :text => "http://www.example.com/rsvp_confirmation/1/dummyconfirmationtoken"})
+    allow(RestClient).to receive(:post)
     within(:css, 'nav') do
       click_on('Courses')
     end
     click_on('RSVP')
-    fill_in('Email', with: 'attendee@email.com')
-    fill_in('Date of birth', with: '1986-05-26')
-    click_on('Sign up')
+    course_sign_up(email: 'attendee@email.com', date_of_birth: '1986-05-26')
+    expect(RestClient).to have_received(:post).with("https://api:dummyapi@api.mailgun.net/v3/dummydomain/messages",
+                                              {:from=>"Course admin <mailgun@dummydomain>",
+                                              :to=>"attendee@email.com",
+                                              :subject => "Confirm your place on the course",
+                                              :text => "Please click this link to confirm your place on the course:\nhttp://www.example.com/rsvp_confirmation/1/dummyconfirmationtoken"})
   end
   
 end
