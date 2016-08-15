@@ -12,7 +12,7 @@ class Admin::SessionsController < ApplicationController
   
   def create
     admin = Admin.find_by(email: session_params[:email])
-    if admin && admin.authenticate(session_params[:password])
+    if admin && admin.authenticate(:password, session_params[:password])
       sign_in(admin)
     else
       flash[:errors] = ['Those credentials are invalid']

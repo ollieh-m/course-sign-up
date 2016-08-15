@@ -3,6 +3,7 @@ require 'bcrypt'
 class Admin < ActiveRecord::Base
   
   include BCrypt
+  include AuthenticationHandler
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   attr_accessor :password
@@ -15,10 +16,5 @@ class Admin < ActiveRecord::Base
       admin.password_hash = password
     end
   end
-  
-  def authenticate(submitted_password)
-    my_password = BCrypt::Password.new(self.password_hash)
-    my_password == submitted_password
-  end
-  
+
 end

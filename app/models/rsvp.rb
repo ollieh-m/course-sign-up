@@ -2,6 +2,7 @@ class Rsvp < ActiveRecord::Base
   
   include RsvpValidations
   include ErrorsHandler
+  include AuthenticationHandler
   
   validates :attendee, uniqueness: {scope: :course}
   validate { validate_attendee }

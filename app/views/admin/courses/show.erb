@@ -3,3 +3,10 @@
     <li><%= attendee.email %></li>
   <% end %></ul>
 </div>
+
+<div class='confirmed-attendees'>
+  <ul><%= @course.confirmed_attendees.each do |attendee| %>
+    <li><%= attendee.email %></li>
+  <% end %></ul>
+</div>
+
